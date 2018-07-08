@@ -66,6 +66,17 @@
             'default')
         player.playVideo()
     }
+
+    var playList = ['FGXDKrUoVrw', '8HlqSrCazqo','6xncCLKC7gY', 'XF7b_MNEIAg']
+    function loadVideos(newPlaylist) {
+
+        player.loadPlaylist(
+            playlist=newPlaylist,
+            index=0, //index first video
+            startSeconds= 0 // start time
+    )
+        // player.loadVideoByUrl(['https://www.youtube.com/watch?v=FkpCP9R1Jjc'] )
+    }
 </script>
 
 </body>
