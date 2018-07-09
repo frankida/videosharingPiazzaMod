@@ -80,7 +80,9 @@
     // thumbnail
     // http://img.youtube.com/vi/[video-id]/[thumbnail-number].jpg
 
-    function getThumbnails(playList ){
+    function getThumbnails(playList, width=160, height=120 ){
+        // var width= 160
+        // var height= 120
         var imgArray = new Array()
         // var img=new Image()
         for (i=0; i<playList.length; i++){
@@ -88,6 +90,8 @@
             console.log("http://img.youtube.com/vi/"+playList[i]+"/0.jpg")
             var img=new Image()
             img.src = "http://img.youtube.com/vi/"+playList[i]+"/0.jpg"
+            img.width = width;
+            img.height = height;
             // uncomment to show images
             // document.body.appendChild(img)
             imgArray.push(img)
