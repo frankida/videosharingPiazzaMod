@@ -2,15 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Testing youtube embedding</title>
+    <title>Functional prototype for Social learning viewer</title>
+    <style>
+        body{
+            width: auto;
+        }
+        #thumbs{
+            overflow-x: scroll;
+            width: auto;
+            white-space: nowrap;
+        }
+        .thumb{
+            display: inline-block;
+            width: 300px;
+            height: 200px;
+            border:1px solid;
+        }
+    </style>
 </head>
 <body>
 
- <!--1. The <iframe> (and video player) will replace this <div> tag.-->
- <h1> all your base are belong to us</h1>
- <div id="player"></div>
- <h2> ready player one</h2>
+
+ <h1> Online learning social learning player </h1>
+
+     <div id="player"></div>
+        <div id="thumbs" >
+            <!--<div class="thumb">-->
+                <!--<img src="http://img.youtube.com/vi/FGXDKrUoVrw/0.jpg" width="300" height="200">-->
+            <!--</div>-->
+            <!--<div class="thumb">-->
+                <!--<img src="http://img.youtube.com/vi/8HlqSrCazqo/0.jpg" width="300" height="200">-->
+            <!--</div>-->
+            <!--<div class="thumb">-->
+               <!--<img src="http://img.youtube.com/vi/6xncCLKC7gY/0.jpg" width="300" height="200">-->
+            <!--</div>-->
+            <!--<div class="thumb">-->
+                <!--<img src="http://img.youtube.com/vi/XF7b_MNEIAg/0.jpg" width="300" height="200">-->
+            <!--</div>-->
+        </div>
+
 <script async>
+
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
@@ -53,6 +85,7 @@
             // done = true;
         }
     }
+
     function stopVideo() {
         player.stopVideo();
     }
@@ -67,9 +100,9 @@
         player.playVideo()
     }
 
-    var playList = ['FGXDKrUoVrw', '8HlqSrCazqo','6xncCLKC7gY', 'XF7b_MNEIAg']
-    function loadVideos(newPlaylist) {
+    var playList = ['FGXDKrUoVrw', '8HlqSrCazqo','6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
+    function loadVideosfromPlaylist(newPlaylist) {
         player.loadPlaylist(
             playlist=newPlaylist,
             index=0, //index first video
@@ -80,7 +113,7 @@
     // thumbnail
     // http://img.youtube.com/vi/[video-id]/[thumbnail-number].jpg
 
-    function getThumbnails(playList, width=160, height=120 ){
+    function getThumbnails(playList, width=300, height=200 ){
         // var width= 160
         // var height= 120
         var imgArray = new Array()
@@ -95,11 +128,37 @@
             // uncomment to show images
             // document.body.appendChild(img)
             imgArray.push(img)
-
         }
         return imgArray
     }
-</script>
 
+    const topThumb = document.querySelector("#thumbs")
+    images = getThumbnails(playList)
+    for (var i = 0; i < playList.length; i++) {
+        // topThumb.appendChild(images[i])
+        var div = document.createElement('div')
+        div.className='thumb'
+        // console.log(images[i])
+        div.append(images[i])
+        topThumb.appendChild(div)
+    }
+
+
+    const thumbs = document.querySelectorAll(".thumb")
+
+    function addClickPlay(playList) {
+        for (var i = 0; i < playList.length; i++) {
+            // i = 0
+            let videoName = playList[i]
+            thumbs[i].addEventListener("click", function () {
+                loadNewVideo(videoName)
+            }, false)
+        }
+    }
+    addClickPlay(playList);
+
+
+
+</script>
 </body>
 </html>
