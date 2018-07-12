@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Functional prototype for Social learning viewer</title>
-
 </head>
+
 <body>
-
 <style>
-
     #thumbs {
         overflow-x: scroll;
         width: auto;
@@ -22,10 +20,8 @@
         border: 1px solid;
     }
 </style>
-<h1> Online learning social learning player </h1>
 
-<!--<div id="player"></div>-->
-<!--<div id="thumbs"></div>-->
+<h1> Online learning social learning player </h1>
 
 <script async>
 
@@ -58,7 +54,6 @@
     function onPlayerReady(event) {
         // event.target.playVideo();
         // player.playVideo()
-
     }
 
     // 5. The API calls this function when the player's state changes.
@@ -73,11 +68,9 @@
         }
     }
 
-    function stopVideo() {
-        player.stopVideo();
-    }
-
-    var espnVideo = 'b8bxDq7RgYo'
+    // function stopVideo() {
+    //     player.stopVideo();
+    // }
 
     function loadNewVideo(videoId) {
         player.loadVideoById(
@@ -87,7 +80,7 @@
         player.playVideo()
     }
 
-
+    var espnVideo = 'b8bxDq7RgYo' //test video code
 
     var playList = ['FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
@@ -97,13 +90,9 @@
             index = 0, //index first video
             startSeconds = 0 // start time
         )
-        // player.loadVideoByUrl(['https://www.youtube.com/watch?v=FkpCP9R1Jjc'] )
     }
 
-
-
-
-    // thumbnail
+    // thumbnail link
     // http://img.youtube.com/vi/[video-id]/[thumbnail-number].jpg
 
     function getThumbnails(playList, width = 300, height = 200) {
@@ -125,8 +114,7 @@
         return imgArray
     }
 
-
-    function loadImagesHtml(playList) {
+    function loadImagesHtml(playList, thumbClass) {
         images = getThumbnails(playList)
         for (var i = 0; i < playList.length; i++) {
             // topThumb.appendChild(images[i])
@@ -134,24 +122,21 @@
             div.className = 'thumb'
             // console.log(images[i])
             div.append(images[i])
-            topThumb.appendChild(div)
+            thumbClass.appendChild(div)
         }
     }
 
-
-
-
-    function addClickPlay(playList) {
+    function addClickPlay(playList, thumbsDivArray) {
         for (var i = 0; i < playList.length; i++) {
             // i = 0
             let videoName = playList[i]
-            thumbs[i].addEventListener("click", function () {
+            thumbsDivArray[i].addEventListener("click", function () {
                 loadNewVideo(videoName)
             }, false)
         }
     }
 
-
+// code for pulling out information from Piazza thread
 
     const youtubeURLs = document.querySelectorAll("iframe#youtube_iframe")
     var youtubeURL = "https://www.youtube.com/embed/qVuprSMlZ38?rel=0&showinfo=0"
@@ -168,6 +153,9 @@
 
         var newdiv = document.createElement('div')
         newdiv.id = 'player'
+        // newdiv.style= overflow-x: scroll;
+        // width: auto;
+        // white-space: nowrap'
         newbody.appendChild(newdiv)
         var newdiv2 = document.createElement('div')
         newdiv2.id = 'thumbs'
@@ -179,23 +167,27 @@
 
     function pullVideos(threadname){ //this method gets all the videos from a thread and returns an array video codes
         let vidArray = new Array()
-
         return vidArray
     }
 
-    function buildPlayer(threadname){ // this builds out the player in specified thread
+    function buildPlayer(){ // this builds out the player in specified thread
 
+        var threadName = "123445"
+
+        initPlayer()
+
+        const topThumb = document.querySelector("#thumbs")
+
+        loadImagesHtml(playList, topThumb)
+
+        const thumbs = document.querySelectorAll(".thumb")
+
+        addClickPlay(playList, thumbs)
     }
 
-    initPlayer()
+    // consolidated execution code
 
-    const topThumb = document.querySelector("#thumbs")
-
-    loadImagesHtml(playList)
-
-    const thumbs = document.querySelectorAll(".thumb")
-
-    addClickPlay(playList);
+    buildPlayer()
 
 </script>
 </body>
