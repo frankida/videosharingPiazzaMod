@@ -24,8 +24,8 @@
 </style>
 <h1> Online learning social learning player </h1>
 
-<div id="player"></div>
-<div id="thumbs"></div>
+<!--<div id="player"></div>-->
+<!--<div id="thumbs"></div>-->
 
 <script async>
 
@@ -87,15 +87,7 @@
         player.playVideo()
     }
 
-    const newbody = document.querySelector("body")
 
-    var newdiv = document.createElement('div')
-    newdiv.className = 'player'
-    newbody.appendChild(newdiv)
-    var newdiv2 = document.createElement('div')
-    newdiv2.className = 'thumbs'
-    newbody.appendChild(newdiv2)
-    console.log(newdiv)
 
     var playList = ['FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
@@ -133,7 +125,6 @@
         return imgArray
     }
 
-    const topThumb = document.querySelector("#thumbs")
 
     function loadImagesHtml(playList) {
         images = getThumbnails(playList)
@@ -147,9 +138,8 @@
         }
     }
 
-    loadImagesHtml(playList)
 
-    const thumbs = document.querySelectorAll(".thumb")
+
 
     function addClickPlay(playList) {
         for (var i = 0; i < playList.length; i++) {
@@ -163,8 +153,6 @@
 
 
 
-    addClickPlay(playList);
-
     const youtubeURLs = document.querySelectorAll("iframe#youtube_iframe")
     var youtubeURL = "https://www.youtube.com/embed/qVuprSMlZ38?rel=0&showinfo=0"
 
@@ -176,7 +164,16 @@
     returnYTCode(youtubeURL)
 
     function initPlayer(){ //this adds the player and thumbs div to the bottom a piazza thread
+        const newbody = document.querySelector("body")
 
+        var newdiv = document.createElement('div')
+        newdiv.id = 'player'
+        newbody.appendChild(newdiv)
+        var newdiv2 = document.createElement('div')
+        newdiv2.id = 'thumbs'
+        newbody.appendChild(newdiv2)
+        console.log(newdiv)
+        console.log(newdiv2)
 
     }
 
@@ -189,6 +186,16 @@
     function buildPlayer(threadname){ // this builds out the player in specified thread
 
     }
+
+    initPlayer()
+
+    const topThumb = document.querySelector("#thumbs")
+
+    loadImagesHtml(playList)
+
+    const thumbs = document.querySelectorAll(".thumb")
+
+    addClickPlay(playList);
 
 </script>
 </body>
