@@ -8,9 +8,6 @@
 <body>
 
 <style>
-    body {
-        width: auto;
-    }
 
     #thumbs {
         overflow-x: scroll;
@@ -28,8 +25,7 @@
 <h1> Online learning social learning player </h1>
 
 <div id="player"></div>
-<div id="thumbs">
-</div>
+<div id="thumbs"></div>
 
 <script async>
 
@@ -47,7 +43,6 @@
     var firstVideo = 'H4X0yqLkCxw'
 
     function onYouTubeIframeAPIReady() {
-        firstVideo
         player = new YT.Player('player', {
             height: '390',
             width: '640',
@@ -92,6 +87,16 @@
         player.playVideo()
     }
 
+    const newbody = document.querySelector("body")
+
+    var newdiv = document.createElement('div')
+    newdiv.className = 'player'
+    newbody.appendChild(newdiv)
+    var newdiv2 = document.createElement('div')
+    newdiv2.className = 'thumbs'
+    newbody.appendChild(newdiv2)
+    console.log(newdiv)
+
     var playList = ['FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
     function loadVideosfromPlaylist(newPlaylist) {
@@ -103,6 +108,9 @@
         // player.loadVideoByUrl(['https://www.youtube.com/watch?v=FkpCP9R1Jjc'] )
     }
 
+
+
+
     // thumbnail
     // http://img.youtube.com/vi/[video-id]/[thumbnail-number].jpg
 
@@ -112,8 +120,8 @@
         var imgArray = new Array()
         // var img=new Image()
         for (i = 0; i < playList.length; i++) {
-            console.log(i)
-            console.log("http://img.youtube.com/vi/" + playList[i] + "/0.jpg")
+            // console.log(i)
+            // console.log("http://img.youtube.com/vi/" + playList[i] + "/0.jpg")
             var img = new Image()
             img.src = "http://img.youtube.com/vi/" + playList[i] + "/0.jpg"
             img.width = width;
@@ -153,8 +161,34 @@
         }
     }
 
+
+
     addClickPlay(playList);
 
+    const youtubeURLs = document.querySelectorAll("iframe#youtube_iframe")
+    var youtubeURL = "https://www.youtube.com/embed/qVuprSMlZ38?rel=0&showinfo=0"
+
+    function returnYTCode(ytURL) {
+        var midVideoCode = youtubeURL.split("/")[4]
+        var ytCode = midVideoCode.split("?")[0]
+        console.log(ytCode)
+    }
+    returnYTCode(youtubeURL)
+
+    function initPlayer(){ //this adds the player and thumbs div to the bottom a piazza thread
+
+
+    }
+
+    function pullVideos(threadname){ //this method gets all the videos from a thread and returns an array video codes
+        let vidArray = new Array()
+
+        return vidArray
+    }
+
+    function buildPlayer(threadname){ // this builds out the player in specified thread
+
+    }
 
 </script>
 </body>
