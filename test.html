@@ -36,7 +36,7 @@
     //    after the API code downloads.
     var player;
 
-    var firstVideo = 'H4X0yqLkCxw'
+    var firstVideo = '7phCmhgohII'
 
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
@@ -82,7 +82,7 @@
 
     var espnVideo = 'b8bxDq7RgYo' //test video code
 
-    var playList = ['FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
+    var playList = ['02aIpg9ZGtQ', 'FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
     function loadVideosfromPlaylist(newPlaylist) {
         player.loadPlaylist(
@@ -170,24 +170,25 @@
         return vidArray
     }
 
-    function buildPlayer(){ // this builds out the player in specified thread
+    function buildPlayer(page){ // this builds out the player in specified thread
 
-        var threadName = "123445"
+        // var threadName = "123445"
+
 
         initPlayer()
 
-        const topThumb = document.querySelector("#thumbs")
+        const topThumb = page.querySelector("#thumbs")
 
         loadImagesHtml(playList, topThumb)
 
-        const thumbs = document.querySelectorAll(".thumb")
+        const thumbs = page.querySelectorAll(".thumb")
 
         addClickPlay(playList, thumbs)
     }
 
     // consolidated execution code
 
-    buildPlayer()
+    buildPlayer(document)
 
 </script>
 </body>
