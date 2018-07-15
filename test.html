@@ -6,20 +6,6 @@
 </head>
 
 <body>
-<style>
-    #thumbs {
-        overflow-x: scroll;
-        width: auto;
-        white-space: nowrap;
-    }
-
-    .thumb {
-        display: inline-block;
-        width: 300px;
-        height: 200px;
-        border: 1px solid;
-    }
-</style>
 
 <h1> Online learning social learning player </h1>
 
@@ -36,7 +22,7 @@
     //    after the API code downloads.
     var player;
 
-    var firstVideo = '7phCmhgohII'
+    var firstVideo = 'ri3ToHQl77I'
 
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
@@ -82,7 +68,7 @@
 
     var espnVideo = 'b8bxDq7RgYo' //test video code
 
-    var playList = ['02aIpg9ZGtQ', 'FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
+    var playList = ['ri3ToHQl77I', '02aIpg9ZGtQ', 'FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
     function loadVideosfromPlaylist(newPlaylist) {
         player.loadPlaylist(
@@ -122,6 +108,11 @@
             div.className = 'thumb'
             // console.log(images[i])
             div.append(images[i])
+            div.style.display='inline-block'
+            div.style.width='300px'
+            div.style.height='200px'
+            div.style.border='1px solid'
+
             thumbClass.appendChild(div)
         }
     }
@@ -151,17 +142,27 @@
     function initPlayer(){ //this adds the player and thumbs div to the bottom a piazza thread
         const newbody = document.querySelector("body")
 
+        /*#thumbs {*/
+        /*overflow-x: scroll;*/
+        /*width: auto;*/
+        /*white-space: nowrap;*/
+        /*}*/
+
         var newdiv = document.createElement('div')
         newdiv.id = 'player'
+
         // newdiv.style= overflow-x: scroll;
         // width: auto;
         // white-space: nowrap'
         newbody.appendChild(newdiv)
         var newdiv2 = document.createElement('div')
+
+        // Adds the thumbs div to DOM
         newdiv2.id = 'thumbs'
+        newdiv2.style.overflowX='scroll'
+        newdiv2.style.width='auto'
+        newdiv2.style.whiteSpace='nowrap'
         newbody.appendChild(newdiv2)
-        console.log(newdiv)
-        console.log(newdiv2)
 
     }
 
@@ -173,7 +174,6 @@
     function buildPlayer(page){ // this builds out the player in specified thread
 
         // var threadName = "123445"
-
 
         initPlayer()
 
