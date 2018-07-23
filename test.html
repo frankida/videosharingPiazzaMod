@@ -10,6 +10,9 @@
 <h1> Online learning social learning player </h1>
 
 <script async>
+    let testing=false
+
+    var playList = ['ri3ToHQl77I', '02aIpg9ZGtQ', 'FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
@@ -22,7 +25,36 @@
     //    after the API code downloads.
     var player;
 
-    var firstVideo = 'ri3ToHQl77I'
+    function pullVideos(threadname){ //this method gets all the videos from a thread and returns an array video codes
+        const ytArray = document.querySelectorAll('iframe')
+        var newArray= []
+        // .item:not(.one)
+
+        let videoCount=0
+
+        for (var i = 0; i<ytArray.length; i++){
+
+            if(ytArray[i].id === '') {
+                videoCount++
+                var myUrl= ytArray[i].src
+                // console.log(myUrl)
+                var ytCode= returnYTCode(myUrl)
+                newArray.push(ytCode)
+            }
+
+        }
+
+        return newArray
+    }
+
+
+    var firstVideo
+
+    if (testing){
+        firstVideo = playList[0]
+    } else {
+        firstVideo = pullVideos()[0]
+    }
 
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
@@ -66,9 +98,6 @@
         player.playVideo()
     }
 
-    var espnVideo = 'b8bxDq7RgYo' //test video code
-
-    var playList = ['ri3ToHQl77I', '02aIpg9ZGtQ', 'FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
     function loadVideosfromPlaylist(newPlaylist) {
         player.loadPlaylist(
@@ -111,7 +140,7 @@
             div.style.display='inline-block'
             div.style.width='300px'
             div.style.height='200px'
-            div.style.border='10px solid'
+            div.style.border='5px solid'
 
             thumbClass.appendChild(div)
         }
@@ -127,22 +156,16 @@
         }
     }
 
-// code for pulling out information from Piazza thread
-
-    const youtubeURLs = document.querySelectorAll("iframe#youtube_iframe")
-    var youtubeURL = "https://www.youtube.com/embed/qVuprSMlZ38?rel=0&showinfo=0"
-
-    function returnYTCode(ytURL) {
-        var midVideoCode = youtubeURL.split("/")[4]
-        var ytCode = midVideoCode.split("?")[0]
-        console.log(ytCode)
-    }
-    returnYTCode(youtubeURL)
-
-    function initPlayer(){ //this adds the player and thumbs div to the bottom a piazza thread
-        const newbody = document.querySelector("body")
 
 
+    function initPlayer(test){ //this adds the player and thumbs div to the bottom a piazza thread
+        let newbody
+        if (test==true) {
+            console.log("its testing")
+            newbody = document.querySelector("body")
+        } else {
+            newbody = document.querySelector(".post_region_text")
+        }
         var newdiv = document.createElement('div')
         newdiv.id = 'player'
 
@@ -154,36 +177,81 @@
         newdiv2.style.overflowX='scroll'
         newdiv2.style.width='auto'
         newdiv2.style.whiteSpace='nowrap'
-        newdiv2.style.color='Gray'
+        newdiv2.style.color='Lavender'
         newdiv2.style.cursor='pointer'
         newbody.appendChild(newdiv2)
 
+        // trying to get hover to work
+
+        // var css = '.thumb : hover{ background-color: "Black" }';
+        // var style = document.createElement('style');
+        //
+        // if (style.styleSheet) {
+        //     style.styleSheet.cssText = css;
+        // } else {
+        //     style.appendChild(document.createTextNode(css));
+        // }
+        //
+        // document.getElementsByTagName('head')[0].appendChild(style);
+
     }
 
-    function pullVideos(threadname){ //this method gets all the videos from a thread and returns an array video codes
-        let vidArray = new Array()
-        return vidArray
+    // code for pulling out information from Piazza thread
+
+    // const youtubeURLs = document.querySelectorAll("iframe#youtube_iframe")
+    // var youtubeURL = "https://www.youtube.com/embed/qVuprSMlZ38?rel=0&showinfo=0"
+
+    function returnYTCode(ytURL) {
+
+        //Not working right for youtube links not embedded
+
+        var ytCode
+        if (ytURL.includes("watch")){  // for just youtube links
+            ytCode= ytURL.split("=")[1]
+
+
+        } else {
+           ytCode= ytURL.split("/")[4]
+            if (ytCode.includes('?')) {
+
+                var ytCode = ytCode.split("?")[0]
+            }
+        }
+        // console.log(ytCode)
+
+    return ytCode
     }
 
-    function buildPlayer(page){ // this builds out the player in specified thread
+
+    function buildPlayer(testing){ // this builds out the player in specified thread
 
         // var threadName = "123445"
+        // test=true
 
-        initPlayer()
+        initPlayer(testing)
 
-        const topThumb = page.querySelector("#thumbs")
+        const topThumb = document.querySelector("#thumbs")
+        let youtubeList
+        if (testing){
+            youtubeList=playList
+        }  else{
+            youtubeList=pullVideos()
+        }
 
-        loadImagesHtml(playList, topThumb)
+        loadImagesHtml(youtubeList, topThumb)
 
-        const thumbs = page.querySelectorAll(".thumb")
+        const thumbs = document.querySelectorAll(".thumb")
 
-        addClickPlay(playList, thumbs)
+        addClickPlay(youtubeList, thumbs)
     }
 
     // consolidated execution code
 
-    buildPlayer(document)
+    // document.querySelector("content").addEventListener("click", buildPlayer(testing));
+
+    buildPlayer(testing=testing)
 
 </script>
+
 </body>
 </html>
