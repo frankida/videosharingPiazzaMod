@@ -26,7 +26,7 @@
     var player;
 
     function pullVideos(threadname){ //this method gets all the videos from a thread and returns an array video codes
-        const ytArray = document.querySelectorAll('iframe')
+        let ytArray = document.querySelectorAll('iframe')
         var newArray= []
         // .item:not(.one)
 
@@ -230,7 +230,7 @@
 
         initPlayer(testing)
 
-        const topThumb = document.querySelector("#thumbs")
+        let topThumb = document.querySelector("#thumbs")
         let youtubeList
         if (testing){
             youtubeList=playList
@@ -240,9 +240,10 @@
 
         loadImagesHtml(youtubeList, topThumb)
 
-        const thumbs = document.querySelectorAll(".thumb")
+        let thumbs = document.querySelectorAll(".thumb")
 
         addClickPlay(youtubeList, thumbs)
+        console.log("hello nurse!")
     }
 
     // consolidated execution code
@@ -250,6 +251,13 @@
     // document.querySelector("content").addEventListener("click", buildPlayer(testing));
 
     buildPlayer(testing=testing)
+
+    // Code for creating event listener
+    
+    // let contentArray =document.querySelectorAll("li[data-pats=post_group_item]")
+    // for (var j =0; j<contentArray.length; j++){
+    //     contentArray[j].addEventListener('click', buildPlayer(testing))
+    // }
 
 </script>
 
