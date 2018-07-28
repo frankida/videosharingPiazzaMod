@@ -10,7 +10,7 @@
 <h1> Online learning social learning player </h1>
 
 <script async>
-    let testing=false
+    let testing=true
 
     var playList = ['ri3ToHQl77I', '02aIpg9ZGtQ', 'FGXDKrUoVrw', '8HlqSrCazqo', '6xncCLKC7gY', 'XF7b_MNEIAg', 'rz5TGN7eUcM']
 
@@ -94,7 +94,6 @@
         player.playVideo()
     }
 
-
     function loadVideosfromPlaylist(newPlaylist) {
         player.loadPlaylist(
             playlist = newPlaylist,
@@ -102,7 +101,6 @@
             startSeconds = 0 // start time
         )
     }
-
 
     function getThumbnails(playList, width = 300, height = 200) {
         var imgArray = new Array()
@@ -141,8 +139,6 @@
         }
     }
 
-
-
     function initPlayer(test){ //this adds the player and thumbs div to the bottom a piazza thread
         let newbody
         if (test==true) {
@@ -166,9 +162,7 @@
         newdiv2.style.cursor='pointer'
         newbody.appendChild(newdiv2)
 
-
     }
-
 
     function returnYTCode(ytURL) {
 
@@ -186,8 +180,6 @@
                 var ytCode = ytCode.split("?")[0]
             }
         }
-        // console.log(ytCode)
-
     return ytCode
     }
 
