@@ -4,4 +4,4 @@
 - This is important because online learning lacks social connection and this can lead to greater attrition in online learning
 - Also, social learning or learning by observing others is powerful way to learn
 - Product demo: https://www.youtube.com/watch?v=aM10LNT8vRU
-
+- Functional protoype:  https://storage.googleapis.com/hahn_edtech/test.html
